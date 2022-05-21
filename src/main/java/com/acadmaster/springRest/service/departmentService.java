@@ -4,6 +4,8 @@ import com.acadmaster.springRest.entity.Department;
 import com.acadmaster.springRest.repository.departmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.*;
 
 //addDep, deleteDep, updateDep, allStudentinDep
@@ -12,16 +14,21 @@ public class departmentService {
 
     @Autowired
     private departmentRepository dpr;
+
+    @Transactional
     private Department addDepartment(Department department){
         return dpr.save(department);
     }
 
+    @Transactional
     private  void deleteDepartment(int id){
 //        Department dep = dpr.findById(id).get();
         dpr.deleteById(id);
     }
 
-    private Department upadteDepartment(Department dep){
+    @Transactional
+    private Department upadteDepartment(int id, Department dep){
+        dep.setDepartmentId(id);
         return dpr.save(dep);
     }
 
