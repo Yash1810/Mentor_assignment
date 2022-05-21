@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 //addstudent, deleteStudent, updateStudent, addDeaprtmenttoStudent
 @Service
@@ -14,17 +15,24 @@ public class studentService {
     @Autowired
     private studentRepository str;
     @Transactional
-    private Student addStudent(Student student){
+    public Student addStudent(Student student){
         return str.save(student);
     }
     @Transactional
-    private void deleteStudent(Integer id){
+    public void deleteStudent(Integer id){
         str.deleteById(id);
     }
     @Transactional
-    private Student updateStudent(int id, Student student){
+    public Student updateStudent(int id, Student student){
         student.setRollNo(id);
         return str.save(student);
+    }
+
+    public Student getStudent(int id){
+        return str.findById(id).get();
+    }
+    public List<Student> getAllStudent(){
+        return str.findAll();
     }
 
 }
