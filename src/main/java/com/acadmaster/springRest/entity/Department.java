@@ -6,10 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,8 +20,20 @@ public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int deaprtmentId;
+    private int departmentId;
     private String departmentName;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "student_department_map",
+            joinColumns = @JoinColumn(
+                    name = "department_id",
+                    referencedColumnName = "departmentId"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "student_id",
+                    referencedColumnName = "rollNo"
+            )
+    )
     Set<Student> students;
 }

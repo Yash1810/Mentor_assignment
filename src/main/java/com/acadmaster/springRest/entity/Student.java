@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,6 +25,6 @@ public class Student {
     private String fName;
     private String lName;
 
-    Set<Department> depatrtments;
+//    Set<Department> departments ;
 
 }
